@@ -100,7 +100,7 @@ jobs:
         run: cargo test
       - name: Install cargo-tarpaulin
         if: ${{ matrix.rust == 'stable' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        run: cargo install cargo-tarpaulin
+        run: cargo install cargo-tarpaulin --version 0.18.0-alpha1
       - name: Run tests and generate coverage report
         if: ${{ matrix.rust == 'stable' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: cargo tarpaulin -v --all-features --ignore-tests --out Xml
