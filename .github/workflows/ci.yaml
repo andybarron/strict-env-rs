@@ -26,7 +26,7 @@ jobs:
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: ${{ matrix.rust }}
           profile: minimal
           components: clippy
           override: true
@@ -36,8 +36,12 @@ jobs:
           working-directory: api
       - name: Install cargo-make
         run: cargo install cargo-make
-      - name: Build and lint
+      - name: Build
+        if: ${{ matrix.rust == 'stable' }}
         run: cargo make ci-build
+      - name: Build and lint
+        if: ${{ matrix.rust == 'stable' }}
+        run: cargo make ci-lint
   format:
     name: Format
     runs-on: ubuntu-latest
@@ -45,16 +49,13 @@ jobs:
       matrix:
         rust:
           - stable
-          - beta
-          - nightly
-          - 1.26.0
     steps:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: ${{ matrix.rust }}
           profile: minimal
           components: rustfmt
           override: true
@@ -82,7 +83,7 @@ jobs:
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: ${{ matrix.rust }}
           profile: minimal
           override: true
       - name: Cache Rust dependencies
