@@ -93,10 +93,9 @@ jobs:
         run: cargo install cargo-make
       - name: Run tests and generate coverage report
         run: cargo make ci-test
-      ## TODO: Implement
-      # - name: Upload to codecov.io
-      #   uses: codecov/codecov-action@v1
-      #   directory: api
-      #   working-directory: api
-      #   with:
-      #     fail_ci_if_error: true
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v1
+        directory: api
+        working-directory: api
+        with:
+          fail_ci_if_error: true

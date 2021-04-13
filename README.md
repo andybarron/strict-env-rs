@@ -16,13 +16,13 @@ _Parse config values from environment variables_
 [build-url]: https://github.com/andybarron/strict-env-rs/actions
 [coverage-badge]: https://img.shields.io/codecov/c/gh/andybarron/strict-env-rs?labelColor=112&logo=codecov&logoColor=fff&style=flat-square
 [coverage-url]: https://codecov.io/gh/andybarron/strict-env-rs
-[crates-badge]: https://img.shields.io/crates/v/strict-env-rs?labelColor=112&logo=rust&logoColor=fff&style=flat-square
-[crates-url]: https://crates.io/crates/strict-env-rs
-[docs-badge]: https://img.shields.io/docsrs/strict-env-rs?labelColor=112&logo=read-the-docs&logoColor=fff&style=flat-square
-[docs-url]: https://docs.rs/strict-env-rs
-[downloads-badge]: https://img.shields.io/crates/d/strict-env-rs?labelColor=112&color=informational&style=flat-square
-[license-badge]: https://img.shields.io/crates/l/strict-env-rs?labelColor=112&style=flat-square
-[license-url]: https://github.com/andybarron/strict-env-rs/blob/main/LICENSE.txt
+[crates-badge]: https://img.shields.io/crates/v/strict-env?labelColor=112&logo=rust&logoColor=fff&style=flat-square
+[crates-url]: https://crates.io/crates/strict-env
+[docs-badge]: https://img.shields.io/docsrs/strict-env?labelColor=112&logo=read-the-docs&logoColor=fff&style=flat-square
+[docs-url]: https://docs.rs/strict-env
+[downloads-badge]: https://img.shields.io/crates/d/strict-env?labelColor=112&color=informational&style=flat-square
+[license-badge]: https://img.shields.io/crates/l/strict-env?labelColor=112&style=flat-square
+[license-url]: https://github.com/andybarron/strict-env-rs/blob/main/LICENSE.md
 [rust-version-badge]: https://img.shields.io/badge/rustc-1.26+-informational?logo=rust&logoColor=fff&labelColor=112&style=flat-square
 [rust-version-link]: https://www.rust-lang.org
 
