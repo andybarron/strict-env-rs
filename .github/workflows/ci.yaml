@@ -19,11 +19,20 @@ jobs:
           - stable
           - beta
           - nightly
-          - 1.31.0
+          - 1.40.0
     steps:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Install Rust toolchain
+        if: ${{ matrix.rust != 'stable' }}
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+          profile: minimal
+          components: clippy
+          override: true
+      - name: Install Rust toolchain + clippy
+        if: ${{ matrix.rust == 'stable' }}
         uses: actions-rs/toolchain@v1
         with:
           toolchain: ${{ matrix.rust }}
@@ -34,14 +43,12 @@ jobs:
         uses: Swatinem/rust-cache@v1
         with:
           working-directory: api
-      - name: Install cargo-make
-        run: cargo install cargo-make
       - name: Build
-        if: ${{ matrix.rust == 'stable' }}
-        run: cargo make ci-build
+        if: ${{ matrix.rust != 'stable' }}
+        run: cargo check --verbose --all-targets
       - name: Build and lint
         if: ${{ matrix.rust == 'stable' }}
-        run: cargo make ci-lint
+        run: cargo clippy --verbose --all-targets
   format:
     name: Format
     runs-on: ubuntu-latest
@@ -63,10 +70,8 @@ jobs:
         uses: Swatinem/rust-cache@v1
         with:
           working-directory: api
-      - name: Install cargo-make
-        run: cargo install cargo-make
       - name: Check format
-        run: cargo make ci-format
+        run: cargo fmt -- --check --verbose
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -76,7 +81,7 @@ jobs:
           - stable
           - beta
           - nightly
-          - 1.31.0
+          - 1.40.0
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -90,10 +95,12 @@ jobs:
         uses: Swatinem/rust-cache@v1
         with:
           working-directory: api
-      - name: Install cargo-make
-        run: cargo install cargo-make
+      - name: Run tests
+        if: ${{ !(matrix.rust == 'stable' && github.event_name == 'push' && github.ref == 'refs/heads/main') }}
+        run: cargo test
       - name: Run tests and generate coverage report
-        run: cargo make ci-test
+        if: ${{ matrix.rust == 'stable' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: cargo tarpaulin -v --all-features --ignore-tests --out Xml
       - name: Upload coverage report
         if: ${{ matrix.rust == 'stable' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: codecov/codecov-action@v1

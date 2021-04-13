@@ -13,23 +13,3 @@ args = ["watch", "-x", "${@}"]
 [tasks.release]
 command = "cargo"
 args = ["release", "${@}"]
-
-# CI tasks
-
-[tasks.ci-build]
-command = "cargo"
-args = ["check", "--verbose", "--all-targets"]
-env = { "RUSTFLAGS" = "-D warnings" }
-
-[tasks.ci-format]
-command = "cargo"
-args = ["fmt", "--", "--check", "--verbose"]
-
-[tasks.ci-lint]
-command = "cargo"
-args = ["clippy", "--verbose", "--all-targets"]
-env = { "RUSTFLAGS" = "-D warnings" }
-
-[tasks.ci-test]
-command = "cargo"
-args = ["tarpaulin", "-v", "--all-features", "--ignore-tests", "--out", "Xml"]
