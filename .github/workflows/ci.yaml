@@ -1,0 +1,102 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+defaults:
+  run:
+    shell: bash
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - beta
+          - nightly
+          - 1.26.0
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          components: clippy
+          override: true
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: api
+      - name: Install cargo-make
+        run: cargo install cargo-make
+      - name: Build and lint
+        run: cargo make ci-build
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - beta
+          - nightly
+          - 1.26.0
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          components: rustfmt
+          override: true
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: api
+      - name: Install cargo-make
+        run: cargo install cargo-make
+      - name: Check format
+        run: cargo make ci-format
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - beta
+          - nightly
+          - 1.26.0
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: api
+      - name: Install cargo-make
+        run: cargo install cargo-make
+      - name: Run tests and generate coverage report
+        run: cargo make ci-test
+      ## TODO: Implement
+      # - name: Upload to codecov.io
+      #   uses: codecov/codecov-action@v1
+      #   directory: api
+      #   working-directory: api
+      #   with:
+      #     fail_ci_if_error: true

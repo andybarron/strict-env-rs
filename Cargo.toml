@@ -1,0 +1,19 @@
+[package]
+name = "strict-env"
+version = "0.1.0"
+authors = ["Andy Barron <andrewlbarron@gmail.com>"]
+edition = "2018"
+description = "Parse config values from environment variables"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/andybarron/tokio-rayon"
+keywords = ["config", "configuration", "environment", "application"]
+categories = ["config"]
+
+[dependencies]
+thiserror = "1.0.24"
+
+[dev-dependencies]
+humantime = "2.1.0"
+os_str_bytes = "3.0.0"
+serial_test = "0.5.1"
