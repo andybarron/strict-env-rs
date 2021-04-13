@@ -48,7 +48,7 @@ jobs:
         run: cargo check --verbose --all-targets
       - name: Build and lint
         if: ${{ matrix.rust == 'stable' }}
-        run: cargo clippy --verbose --all-targets
+        run: RUSTFLAGS="-D warnings" cargo clippy --verbose --all-targets
   format:
     name: Format
     runs-on: ubuntu-latest

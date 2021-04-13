@@ -198,7 +198,7 @@ mod tests {
         fn missing() {
             let _guard = EnvGuard::without("TEST_VAR");
             let error = parse::<u8>("TEST_VAR").unwrap_err();
-            assert!(matches!(error, Error::Missing { .. },));
+            assert!(matches!(error, Error::Missing { .. }));
         }
 
         #[test]
@@ -206,7 +206,7 @@ mod tests {
         fn empty() {
             let _guard = EnvGuard::with("TEST_VAR", "");
             let error = parse::<u8>("TEST_VAR").unwrap_err();
-            assert!(matches!(error, Error::Missing { .. },));
+            assert!(matches!(error, Error::Missing { .. }));
         }
 
         #[test]
