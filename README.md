@@ -23,7 +23,7 @@ _Parse config values from environment variables_
 [downloads-badge]: https://img.shields.io/crates/d/strict-env?labelColor=112&color=informational&style=flat-square
 [license-badge]: https://img.shields.io/crates/l/strict-env?labelColor=112&style=flat-square
 [license-url]: https://github.com/andybarron/strict-env-rs/blob/main/LICENSE.md
-[rust-version-badge]: https://img.shields.io/badge/rustc-1.30+-informational?logo=rust&logoColor=fff&labelColor=112&style=flat-square
+[rust-version-badge]: https://img.shields.io/badge/rustc-1.31+-informational?logo=rust&logoColor=fff&labelColor=112&style=flat-square
 [rust-version-link]: https://www.rust-lang.org
 
 ## Resources
