@@ -94,8 +94,7 @@ jobs:
       - name: Run tests and generate coverage report
         run: cargo make ci-test
       - name: Upload coverage report
+        if: ${{ matrix.rust == 'stable' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: codecov/codecov-action@v1
-        directory: api
-        working-directory: api
         with:
           fail_ci_if_error: true
