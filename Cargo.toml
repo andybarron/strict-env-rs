@@ -6,7 +6,7 @@ edition = "2018"
 description = "Parse config values from environment variables"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/andybarron/tokio-rayon"
+repository = "https://github.com/andybarron/strict-env-rs"
 keywords = ["config", "configuration", "environment", "application"]
 categories = ["config"]
 
