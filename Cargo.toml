@@ -1,6 +1,6 @@
 [package]
 name = "strict-env"
-version = "0.1.1-dev"
+version = "0.1.1"
 authors = ["Andy Barron <andrewlbarron@gmail.com>"]
 edition = "2018"
 description = "Parse config values from environment variables"
