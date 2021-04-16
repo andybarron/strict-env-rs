@@ -326,14 +326,22 @@ mod tests {
         fn is_send() {
             assert_send::<Error>();
         }
+
         #[test]
         fn is_sync() {
             assert_sync::<Error>();
         }
+
         #[test]
         fn is_static() {
             assert_static::<Error>();
         }
+
+        #[test]
+        fn is_into_anyhow() {
+            assert_into_anyhow::<Error>();
+        }
+
         #[test]
         fn missing() {
             let error = Error::Missing {
@@ -344,6 +352,7 @@ mod tests {
                 "Missing or empty environment variable \"TEST_VAR\"",
             );
         }
+
         #[test]
         fn invalid_utf8() {
             let error = Error::InvalidUtf8 {
@@ -355,6 +364,7 @@ mod tests {
                 "Invalid UTF-8 in environment variable \"TEST_VAR\"",
             );
         }
+
         #[test]
         fn invalid_value() {
             let source = "".parse::<u8>().unwrap_err();
@@ -375,6 +385,7 @@ mod tests {
     fn assert_send<T: Send>() {}
     fn assert_sync<T: Sync>() {}
     fn assert_static<T: 'static>() {}
+    fn assert_into_anyhow<T: Into<anyhow::Error>>() {}
 
     fn invalid_utf8_string() -> OsString {
         let bytes = [b'f', b'o', b'o', 0x80];
